@@ -29,6 +29,10 @@ app.use('/api', cartRoute);
 app.use(registerRoute);
 app.use(loginRoute);
 app.use(logoutRoute);
+
+app.get('/', (req, res) => {
+    res.send('Welcome to the home page!');
+});
 app.listen(8080, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
