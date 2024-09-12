@@ -36,3 +36,28 @@ app.get('/', (req, res) => {
 app.listen(8080, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
+const mongoose = require('mongoose');
+
+
+const mongoUrl = process.env.MONGODB_URI;
+const config = {
+    connectTimeoutMS: 30000,
+    socketTimeoutMS: 30000,
+    useUnifiedTopology: true
+  }
+
+//   const connectDB = async ()=>{
+//     try{
+//         await mongoose.connect(mongoUrl,config);
+//         console.log('MongoDB connected');
+//     }catch(err){
+//         console.log("MongoDB connection error:",err);
+//     }
+//   };
+mongoose.connect("mongodb+srv://demonking:demon123@cluster0.pmncnmh.mongodb.net/?retryWrites=true&w=majority",config).then(() => {
+    console.log('MongoDB connected');
+}).catch(err => console.error('MongoDB connection error:', err));
+
+module.exports= mongoose.connection;
