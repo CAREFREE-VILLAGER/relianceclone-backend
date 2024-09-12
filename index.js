@@ -5,7 +5,7 @@ const loginRoute = require('./routes/loginRoute');
 const dotenv = require('dotenv').config();
 const logoutRoute = require('./routes/logoutRoute');
 const session = require('express-session');
-const MongoStore = require('connect-mongo');  // Import connect-mongo
+const MongoStore = require('connect-mongo');  
 const productRoutes = require('./routes/productRoutes'); 
 const cartRoute = require('./routes/cartRoute');
 const cors = require('cors');
@@ -16,14 +16,14 @@ app.use(cors());
 
 app.use(express.json());
 
-// Use connect-mongo to store sessions in MongoDB
+
 app.use(session({
     secret: 'your-session-secret',
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
         mongoUrl: process.env.MONGODB_URI || "mongodb+srv://demonking:demon123@cluster0.pmncnmh.mongodb.net/?retryWrites=true&w=majority", // Store session data in MongoDB
-        ttl: 14 * 24 * 60 * 60 // Session expiration time (14 days)
+        ttl: 14 * 24 * 60 * 60 
     })
 }));
 
@@ -49,11 +49,10 @@ const mongoUrl = process.env.MONGODB_URI || "mongodb+srv://demonking:demon123@cl
 const config = {
     connectTimeoutMS: 30000,
     socketTimeoutMS: 30000,
-    useNewUrlParser: true,  // Keep only the useNewUrlParser option
-    // Remove useUnifiedTopology
+    useNewUrlParser: true,  
 };
 
-// Connect to MongoDB using Mongoose
+
 mongoose.connect(mongoUrl, config)
     .then(() => {
         console.log('MongoDB connected');
